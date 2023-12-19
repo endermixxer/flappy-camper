@@ -51,5 +51,5 @@ export const collidableType = {
 	Forest: 1,
 	Trash: 2,
 	TrashCan: 3,
-	Food: 4,
+	Valence: 4,
 };

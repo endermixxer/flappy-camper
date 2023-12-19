@@ -1,6 +1,6 @@
 //@ts-check
 
-import { canvas, CANVAS_HEIGHT, CANVAS_WIDTH, EVENTS } from "../constants.js";
+import { canvas, CANVAS_HEIGHT, CANVAS_WIDTH, EVENTS, OCTET_RULE_BOOST } from "../constants.js";
 import { Scoreboard } from "../scoreboard.js";
 
 export class GameOverScene {
@@ -56,7 +56,7 @@ export class GameOverScene {
 		let scoreFontSize = 40;
 		this.ctx.font = `${scoreFontSize}px rocko`;
 
-		text = `Distance Traveled: ${this.sb.getDistanceTraveled()} miles`;
+		text = `Distance From Nuclei: ${this.sb.getDistanceTraveled()}`;
 		this.ctx.fillText(
 			text,
 			CANVAS_WIDTH / 2,
@@ -67,12 +67,16 @@ export class GameOverScene {
 			CANVAS_WIDTH / 2,
 			300 - (scoreFontSize * 2 + 10)
 		);
-		text = `Trash Collected: ${this.sb.trashCollected}`;
+		text = `Metal Collected: ${this.sb.trashCollected}`;
 		this.ctx.fillText(text, CANVAS_WIDTH / 2, 300 - (scoreFontSize + 10));
 		this.ctx.strokeText(text, CANVAS_WIDTH / 2, 300 - (scoreFontSize + 10));
-		text = `Food Collected: ${this.sb.foodCollected}`;
+		text = `Valence Collected: ${this.sb.valenceCollected}`;
 		this.ctx.fillText(text, CANVAS_WIDTH / 2, 300);
 		this.ctx.strokeText(text, CANVAS_WIDTH / 2, 300);
+
+		text = `Octet Rule: ${this.sb.octetRule}`;
+		this.ctx.fillText(text, CANVAS_WIDTH / 2, 300 - (scoreFontSize * 3 + 10));
+		this.ctx.strokeText(text, CANVAS_WIDTH / 2, 300 - (scoreFontSize * 3 + 10));
 
 		this.ctx.font = `80px rocko`;
 		this.ctx.fillStyle = "white";

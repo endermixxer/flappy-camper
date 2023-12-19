@@ -1,6 +1,6 @@
 //@ts-check
 
-import { CANVAS_WIDTH, EVENTS, KARMA_TRASH_BOOST } from "./constants.js";
+import { CANVAS_WIDTH, EVENTS, KARMA_TRASH_BOOST, OCTET_RULE_BOOST } from "./constants.js";
 import { game } from "./game.js";
 
 const MIN_STAMINA = 0;
@@ -19,7 +19,8 @@ export class Scoreboard {
 		this.stamina = 100;
 
 		this.trashCollected = 0;
-		this.foodCollected = 0;
+		this.valenceCollected = 0;
+		this.octetRule = 0;
 
 		this.karmaMeter = {
 			x: 10,
@@ -63,7 +64,7 @@ export class Scoreboard {
 	#drawDistanceTraveled() {
 		this.ctx.save();
 		this.ctx.globalAlpha = 0.8;
-		const distance = `${this.getDistanceTraveled()} MILES`;
+		const distance = `${this.getDistanceTraveled()} FROM NUCLEI`;
 		const fontHeight = 20;
 		const x = CANVAS_WIDTH / 2;
 		const y = fontHeight + 10;
@@ -82,8 +83,9 @@ export class Scoreboard {
 
 	getTotalScore() {
 		let score = (
-			(this.foodCollected + +this.getDistanceTraveled()) *
-			(this.trashCollected * KARMA_TRASH_BOOST)
+			(this.valenceCollected + +this.getDistanceTraveled()) *
+			(this.trashCollected * KARMA_TRASH_BOOST) +
+			(this.octetRule * OCTET_RULE_BOOST)
 		).toFixed(0);
 		return score;
 	}
@@ -134,7 +136,7 @@ export class Scoreboard {
 		);
 
 		this.ctx.globalAlpha = 0.7;
-		const text = `TRAIL KARMA: ${this.trailKarma.toFixed(0)}`;
+		const text = `ELECTRONEGATIVITY: ${this.trailKarma.toFixed(0)}`;
 		const fontHeight = 20;
 		const x = this.karmaMeter.x + this.karmaMeter.w / 2;
 		const y = this.karmaMeter.y + fontHeight;
@@ -167,7 +169,7 @@ export class Scoreboard {
 		);
 
 		this.ctx.globalAlpha = 0.7;
-		const staminaText = `STAMINA: ${this.stamina.toFixed(0)}`;
+		const staminaText = `VALENCE: ${this.stamina.toFixed(0)}`;
 		const fontHeight = 20;
 		const x = this.staminaMeter.x + this.staminaMeter.w / 2;
 		const y = this.staminaMeter.y + fontHeight;
@@ -218,7 +220,11 @@ export class Scoreboard {
 			(/** @type {CustomEventInit} */ e) => {
 				//console.log(EVENTS.staminaChange, e.detail);
 				this.updateStamina(e.detail);
-				this.foodCollected++;
+				this.valenceCollected++;
+
+				if (this.valenceCollected %8 == 0) {
+					this.octetRule++;
+				}
 			}
 		);
 

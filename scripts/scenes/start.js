@@ -41,7 +41,7 @@ export class StartScene {
 		this.ctx.textAlign = "center";
 		this.ctx.textBaseline = "middle";
 
-		let text = "Flappy Camper";
+		let text = "Electron Hunt";
 		this.ctx.font = "80px driftwood";
 		this.ctx.fillText(text, CANVAS_WIDTH / 2, 100);
 		this.ctx.strokeText(text, CANVAS_WIDTH / 2, 100);
@@ -65,15 +65,15 @@ export class StartScene {
 		this.ctx.fillText(text, CANVAS_WIDTH / 2, instructionY);
 		instructionY += instructionOffset;
 
-		text = "If you can't collect trash, click on it to tag it.";
+		text = "If you can't collect metal, click on it to tag it.";
 		this.ctx.fillText(text, CANVAS_WIDTH / 2, instructionY);
 		instructionY += instructionOffset;
 
-		text = "Collect as much trash as possible!";
+		text = "Collect as much metal as possible!";
 		this.ctx.fillText(text, CANVAS_WIDTH / 2, instructionY);
 		instructionY += instructionOffset;
 
-		text = "Food also gives you points";
+		text = "Valence also gives you points";
 		this.ctx.fillText(text, CANVAS_WIDTH / 2, instructionY);
 		instructionY += instructionOffset;
 

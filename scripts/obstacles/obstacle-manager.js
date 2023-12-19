@@ -20,7 +20,8 @@ import {
 } from "./forest.js";
 import { Trash } from "../collectable/trash.js";
 import { Collidable } from "./collidable.js";
-import { Food } from "../collectable/food.js";
+//import { Food } from "../collectable/food.js";
+import { Valence } from "../collectable/valence.js";
 
 export class ObstacleManager {
 	/**
@@ -49,6 +50,9 @@ export class ObstacleManager {
 		this.food = [];
 		this.nextFoodTime = 3000;
 		this.lastFoodTime = 0;
+		this.valence = [];
+		this.nextValenceTime = 3000;
+		this.lastValenceTime = 0;
 	}
 
 	init() {
@@ -104,14 +108,14 @@ export class ObstacleManager {
 	 * @param {number} timeElapsed
 	 */
 	update(timeElapsed) {
-		[...this.peaks, ...this.forests, ...this.food, ...this.trash].forEach(
+		[...this.peaks, ...this.forests, ...this.valence, ...this.trash].forEach(
 			(b) => {
 				b.update(timeElapsed);
 			}
 		);
 
 		this.updateTrash(timeElapsed);
-		this.updateFood(timeElapsed);
+		this.updateValence(timeElapsed);
 		this.updatePeaks();
 		this.updateForests();
 	}
@@ -146,23 +150,42 @@ export class ObstacleManager {
 		this.trash.push(trash);
 	}
 
+	// /**
+	//  * @param {number} timeElapsed
+	//  */
+	// updateFood(timeElapsed) {
+	// 	this.food = this.food.filter((o) => o.isVisible && !o.isCollected);
+
+	// 	this.lastFoodTime += timeElapsed;
+	// 	if (this.lastFoodTime < this.nextFoodTime) return;
+	// 	this.lastFoodTime = 0;
+
+	// 	this.nextFoodTime = Math.floor(Math.random() * 5000 + 10 * 1000);
+
+	// 	const food = new Food(this.ctx);
+	// 	food.y = this.setCollectablePlacement(food);
+
+	// 	// console.log(food);
+	// 	this.food.push(food);
+	// }
+
 	/**
 	 * @param {number} timeElapsed
 	 */
-	updateFood(timeElapsed) {
-		this.food = this.food.filter((o) => o.isVisible && !o.isCollected);
+	updateValence(timeElapsed) {
+		this.valence = this.valence.filter((o) => o.isVisible && !o.isCollected);
 
-		this.lastFoodTime += timeElapsed;
-		if (this.lastFoodTime < this.nextFoodTime) return;
-		this.lastFoodTime = 0;
+		this.lastValenceTime += timeElapsed;
+		if (this.lastValenceTime < this.nextValenceTime) return;
+		this.lastValenceTime = 0;
 
-		this.nextFoodTime = Math.floor(Math.random() * 5000 + 10 * 1000);
+		this.nextValenceTime = Math.floor(Math.random() * 5000 + 10 * 1000);
 
-		const food = new Food(this.ctx);
-		food.y = this.setCollectablePlacement(food);
+		const valence = new Valence(this.ctx);
+		valence.y = this.setCollectablePlacement(valence);
 
 		// console.log(food);
-		this.food.push(food);
+		this.valence.push(valence);
 	}
 
 	/**
@@ -232,7 +255,7 @@ export class ObstacleManager {
 	}
 
 	draw() {
-		[...this.peaks, ...this.forests, ...this.food, ...this.trash].forEach(
+		[...this.peaks, ...this.forests, ...this.valence, ...this.trash].forEach(
 			(b) => {
 				b.draw();
 			}

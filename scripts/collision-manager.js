@@ -78,7 +78,7 @@ export class CollisionManager {
 
 	updateCollectables() {
 		const collectables = this.getCollidablesOfInterest([
-			...this.om.food,
+			...this.om.valence,
 			...this.om.trash,
 		]);
 
